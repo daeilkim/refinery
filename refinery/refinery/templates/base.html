@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs -->
+	<meta charset="utf-8">
+   
+	{% block title %}
+	{% endblock %}
+
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/lib/column12.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"/>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/lib/jquery/jquery-1.9.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/lib/jquery/jquery-ui-1.10.4.min.js') }}"></script>
+
+	{% block js_head %}
+	{% endblock %}
+
+  </head>
+
+<body>
+
+	<div class="onepcssgrid-1000">
+		<div class="onerow">
+			<div class="col12" id="header">			
+				<div id="logo">
+                  <img src="{{url_for('static',filename='assets/images/Logo.png')}}" style="width:40px;display:inline-block;"/>
+					<a style="display:inline-block;bottom:7px;position:relative;" href="#">Refinery</a>
+				</div>
+				
+				<div id="menu" >
+					<ul id="nav" class="sf-menu">
+						<li><a title='Logout' href="{{ url_for('logout') }}" class="current"><img class="imgbtn" id="icon_5" src='/static/assets/images/glyphicons_063_power.png'></a></li>
+						<li><a title='Manage' href="{{ url_for('manage_data', username=g.user.username ) }}"><img class="imgbtn" id="icon_3" src='/static/assets/images/glyphicons_144_folder_open.png'></a></li>
+						<li> <img src="/static/assets/images/icons/iconmonstr-info-6-icon-256.png" style="position:relative; top:13px;margin-left: 15px; margin-right: 15px;width:32px;" class="imgbtn" onclick="show_info(true);"/></li>
+						<li><a id="menu_username" class="imgbtn" title='Profile' href="{{ url_for('profile') }}">{% if g.user %}{{g.user.username}}{% endif %}</a></li>
+				 	</ul>  <!-- end #nav  -->
+			 	</div>
+			
+			</div>
+		</div>
+		<div class="onerow">
+			<div class="col12" id="header_line"> </div>
+		</div>
+
+        {% block content %}
+        {% endblock %}
+
+</div> <!-- END BODY-->
+
+{% block js %}
+{% endblock %}
+
+</body>
+</html>

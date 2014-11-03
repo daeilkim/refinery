@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block js_head %}
+<script type="text/javascript" src="{{ url_for('static', filename='assets/lib/jquery.knob.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/experiment.css') }}"/>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/lib/slider/simple-slider.js') }}"/></script>
+{% endblock %}
+
+{% block content %}
+<div style='display:none'>
+  <div id='inline_accept_creation'>
+    <div style="margin:auto;clear:both;">
+      <h2>Creating a new Folder</h2>
+      <div>
+        <h5 style="text-align:center; font-size: 22px;">Folder Name
+        <input class="colorbox_input" style="align:center;" type="text" size="20" id="foldername" value="New Folder"/>
+        </h5>
+      </div>
+      <div style="margin:15px;">
+        <input class="colorbox_btn" type="button" value="Create Folder" onclick="createSubset(true);"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style='display:none'>
+  <div id='inline_viewer' class="bigbar">
+    INLINE STUFF!
+  </div>
+</div>
+
+<div style='display:none'>
+  <div id='inline_accept_creation'>
+    <div id="stopwords" style="margin:auto;clear:both;display:inline-block;">
+      <span class="colorbox_text">Remove these words from all topics (separated by a space)</span>
+      <div style="margin-top:5px;">
+        <textarea class="textarea_cb" rows="8" cols="25" maxlength="140" id="stopword_text">{{stopwords}}</textarea>
+      </div>
+      <div>
+        <input class="colorbox_btn" type="button" onclick="change_stopwords();" value="Update"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="onerow">
+  
+  <div class="col12 last" id="main_container">
+    <a id="filter_btn" onclick="show_stopwords();" style="z-index:999;"/>Remove Unwanted Terms</a>
+    <div id="visual_content">
+      <div id="loadingmsg">
+        <h1> Loading, please wait...</h1>
+      </div>
+      <div id="donutviz">
+      </div>
+
+      <div id="searchbar" style="visibility:hidden">
+      <h3 class="search_heading">Search by Topic Themes and Keywords</h3>
+        <!-- Topicblocks -->
+        <div id="topicsearch" style="display:inline-block;float:left;margin-right:auto;">
+          <h3 class="topicsearch_hdr">Click the rounded topic bars to add a topic block. <br> Click on the block to remove it.</h3>
+          
+        </div>
+        
+        <!-- Search terms -->
+        <div id="kwsearch" style="float:left;">
+          <h3>Add Documents with keywords (seperated by commas)</h3>
+          <textarea id="keyword_box" rows="2" cols="55" id="searchwords" style="margin:auto;clear:both;"></textarea>
+        </div>
+
+        <!-- SUBSET PERCENT KNOB -->
+        <div id="subset_slider" style="display:inline-block;float:left;margin-left:auto;clear:left;">
+          <input  id="knob_percent_subset" data-slider-range="0,100"
+          type="text" data-slider="true" value="10" data-slider-highlight="true">
+        </input>
+        <p id="numdocs">!!!</p>
+
+        <div>
+          <input class="search_btn" type="button" value="Create Document Subset" onclick="makeSubset();"></input>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div id="browsevizouter" style="visibility:hidden;padding:5px;margin-bottom:5px;">
+      <div id="browseresults">
+        <div style="position:relative;margin-bottom:8px;display:inline-block;">
+          <span style="float:left;">Use the </span><span style="float:left;margin:3px;position:relative;top:-3px;"><img style="width:20px;" src="{{url_for('static',filename='assets/images/icons/iconmonstr-plus-5-icon-24.png')}}"/></span><span style="float:left;"> buttons to filter this list</span>
+          <br/>
+          <span style="float:left;">Create a new folder with the button to the right.</span>
+        </div>
+        <div style="display:inline-block;padding:5px;">
+          <a class="imgbtn" style="display:inline-block;" onclick="subsetInfo();"><img style="width:40px;height:40px;" src="/static/assets/images/icons/iconmonstr-note-25-icon.png" title="Create Folder"/></a>
+          <a class="imgbtn" style="display:inline-block;" onclick="backToSearch();"><img style="width:40px;height:40px;" src="/static/assets/images/icons/iconmonstr-x-mark-4-icon-256.png" title="Back to Search" /></a>
+        </div>
+        <div id="browseviz" class="bigbar" ></div>
+      </div>
+      <div id="browsewait">
+        Creating a subset of documents from your query, please wait...
+
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+  var jsvocab = [];
+  {% for v in vocab %}
+  jsvocab.push("{{v|safe}}");
+  {% endfor %}
+
+  var js_doc_names = [];
+  var js_doc_paths = [];
+  {% for dd in dox %}
+  js_doc_names.push("{{dd.name|safe}}");
+  js_doc_paths.push("{{dd.path|safe}}");
+  {% endfor %}
+
+  var view_url = "{{url_for('static',filename='assets/images/icons/iconmonstr-text-file-4-icon.png')}}";
+  var select_button_url = "{{url_for('static',filename='assets/images/icons/iconmonstr-plus-5-icon-24.png')}}";
+  var get_data_url = "{{url_for('get_doc_text', username=g.user.username)}}";
+  var load_url ="{{url_for('load_analysis_tm', username=g.user.username, data_id=d.id, ex_id=ex.id)}}";
+  var makesubset_url ="{{url_for('make_subset', username=g.user.username, folder_id=d.id, ex_id=ex.id)}}";
+  var createsubset_url = "{{url_for('create_subset', username=g.user.username, folder_id=d.id, ex_id=ex.id)}}";
+  var pubsub_url = "{{url_for('stream_menus', username=g.user.username )}}";
+  var stopword_url = "{{url_for('change_stopwords', folder_id=d.id, username=g.user.username )}}";
+
+  var uname = "{{g.user.username}}";
+  
+  var totalDox = parseInt("{{totalDox}}");
+
+  /* Stuff related to slider functionality */
+  $("[data-slider]")
+  .each(function () {
+    var input = $(this);
+    $("<span>")
+    .addClass("output")
+    .insertAfter($(this));
+  })
+  .bind("slider:ready slider:changed", function (event, data) {
+    var v = data.value;
+    var nn = v / 100 * totalDox;
+    var nD = Math.floor(nn);
+    var subset_str = "Subset Percent: <span class='subset_label_percent'> " + data.value.toFixed(0) + "% </span>";
+    $("#numdocs").html(subset_str + "Documents in Subset: <span class='subset_label_docs'>" + nD + "</span>");
+  });
+
+</script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/lib/d3/d3.v3.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/lib/d3/d3.layout.cloud.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/lib/colorbox/colorbox.css') }}"  />
+<script type="text/javascript" src="{{ url_for('static', filename='assets/lib/colorbox/jquery.colorbox-min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/topicmodel.js') }}"></script>
+
+
+{% endblock %}

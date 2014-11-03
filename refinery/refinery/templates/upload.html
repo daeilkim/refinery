@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block js_head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/upload.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/lib/colorbox/colorbox.css') }}"  />
+<script type="text/javascript" src="{{ url_for('static', filename='assets/lib/colorbox/jquery.colorbox-min.js') }}"></script>
+{% endblock %}
+
+{% macro render_field(field) %}
+  {{ field(**kwargs)|safe }}
+  {% if field.errors %}
+    <ul class=errors>
+    {% for error in field.errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
+
+{% block content %}
+
+<input type="hidden" id="deldoc_target" value="{{ url_for('delete_doc', username=g.user.username, data_id=d.id) }}" />
+<input type="hidden" id="doclist_target" value="{{ url_for('get_doc_list', username=g.user.username, data_id=d.id) }}" />
+<input type="hidden" id="filedrag_target" value="{{ url_for('upload_drop', username=g.user.username, data_id=d.id) }}" />
+<input type="hidden" id="get_data_url" value="{{url_for('get_doc_text', username=g.user.username)}}"/>
+<input type="hidden" id="MAX_FILE_SIZE" value="100000000" />
+
+<div style='display:none'>
+  <div id='inline_viewer' class="bigbar">
+    INLINE STUFF!
+  </div>
+</div>
+
+<div style='display:none'>
+  <div id='inline_delete_doc'>
+    <h3>You are about to remove the document</h3>
+    <h2 id="deldocname"></h2>
+    <p>Are you sure you want to do this?</p>
+    <p><input type="button" value="Yes" id="deldocyes"/></p>
+  </div>
+</div>
+
+
+<div class="onerow">
+  <div class="col12 last" id="main_container">
+   
+    <div class="onerow" style="margin-left:25px;margin-top:25px;position:relative;height:85%;">
+      <div class="col2" id="upload_dropzone">
+        <h2>Upload Tools</h2>
+        <div style="position:relative;margin-top:20px;">
+          <div id="filedrag_data" class="filedrag_box">Drag a file or archive (zip) into this box.</div>
+        </div>
+        <div style="position:relative;margin-top:20px; ">
+          <input type="button" id="single_upload" onclick="fileSelector.click();" value="Upload File"/>
+        </div>
+      </div>
+      <div class="col10 last" id="uploadlist" style="position:relative;">
+        <h2>{{d.name}}</h2>
+        <div  style="position:absolute;height:90%;width:97%;bottom:0px;overflow-y:scroll;overflow-x:hidden;margin-right:10px;" class="bigbar">
+          <ul id="listofiles" style="-webkit-padding-start:10px;width:95%">
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="onerow" style="position:absolute;bottom:0;width:100%;">
+      <div class="col10">
+        <div id="upload_progress" style="margin-left:10px;"><span id="progress_text"></span></div>
+      </div>
+      <div class="col2 last">
+        <input type="button" value="Finished" style="font-size:large;width:100%;margin-right:20px;" onclick="preproc_and_go();"></input>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+{% endblock %}
+{% block js %}
+<script>
+var preproc_url = "{{url_for('start_preproc',username=g.user.username,folder_id=main_folder.id)}}";
+var main_url = "{{url_for('manage_data',username=g.user.username)}}";
+
+var pubsub_url = "{{url_for('stream_upload',username=g.user.username)}}";
+
+
+</script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/upload.js') }}"></script>
+<script>
+refresh_doclist();
+</script>
+
+
+{% endblock %}

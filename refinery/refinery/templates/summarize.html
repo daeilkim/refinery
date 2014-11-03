@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block js_head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/experiment.css') }}"/>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/lib/d3/d3.v3.min.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/lib/colorbox/colorbox.css') }}"  />
+<script type="text/javascript" src="{{ url_for('static', filename='assets/lib/colorbox/jquery.colorbox-min.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+
+<div style='display:none'>
+  <div id='inline_viewer' class="bigbar">
+    INLINE STUFF!
+  </div>
+</div>
+
+<div style='display:none'>
+  <div id='results_outer' style="position:relative;">
+
+    <div>
+      <div style="font-size:30px;">Select notes by clicking the circles</div>
+      <div style="margin-bottom:5px;">When you're finished, click the "Keep" Button. Selecting nothing selects all results</div>
+      <input type="button" value="Keep" onclick="keep();"></input><input type="button" value="Cancel" onclick="$.colorbox.close();"></input>
+    </div>
+    <br/>
+
+    <div id='results' class="bigbar">
+    </div>
+
+  </div>
+</div>
+
+<div class="onerow">
+  <div class="col12 last" id="main_container">
+
+    <div class="onerow" id="menubar" style="margin-top:10px;background:#DDDDFF;border-radius:10px;">
+      <div id="menubarinfo" style="width:65%;float:left;margin:10px;font-size:24px;">
+        <div>
+          Select notes by clicking the circles.  Selecting nothing selects everything.
+        </div>
+        <div style="font-size:17px;">
+          Use the buttons on the right to find new notes that are similar to or different from your selection, or to delete your selection.  Click on a note to see it's source document.
+        </div>
+      </div>
+      <div id="menubarbuttons"></div>
+    </div>
+
+    <div class="onerow">
+      <div id="cur_sum" class="bigbar" style="margin:3px;">
+
+
+
+    </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+<script type="text/javascript">
+  var viewdoc_url ="{{url_for('get_doc_fulltext' )}}";
+
+  var variety_url ="{{url_for('get_variety', username=g.user.username, folder_id=folder.id)}}";
+  var similar_url ="{{url_for('get_similar', username=g.user.username, folder_id=folder.id)}}";
+  var delete_url ="{{url_for('sum_delete', username=g.user.username, folder_id=folder.id)}}";
+  var add_url ="{{url_for('sum_add', username=g.user.username, folder_id=folder.id)}}";
+
+  var event_url ="{{url_for('stream_sum', username=g.user.username, data_id=folder.id, ex_id=ex.id)}}";
+
+
+</script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/summarize.js') }}"></script>
+<script type="text/javascript">
+  fill_with_facts(d3.select("#cur_sum"),JSON.parse({{data | tojson}}),true);
+</script>
+{% endblock %}

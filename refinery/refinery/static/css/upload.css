@@ -1,0 +1,93 @@
+#upload_dropzone
+{
+  position:aboslute;
+  margin-top:30px;
+}
+
+.filedrag_box
+{
+  display: block;
+  position: relative;
+  height: 125px;
+  padding: 10px;
+  text-align: center;
+  color: #111;
+  border: 2px dashed #555;
+  border-radius: 10px;
+  cursor: default;
+  }
+
+
+.filedrag_box_hover
+{
+  display: block;
+  position: relative;
+  height: 125px;
+  padding: 10px;
+  text-align: center;
+  color: #111;
+  border: 2px dashed #555;
+  border-radius: 10px;
+  cursor: default;
+  color: #f00;
+  border-color: #f00;
+  border-style: solid;
+  box-shadow: inset 0 3px 4px #888;
+}
+
+/** the img after it gets dropped but before submit */
+#img_frame
+{
+  height: 200px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  }
+
+/**
+#upload_progress
+{
+  border: 1px solid black;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 10px;
+  padding: 5px;
+  width: 95%;
+  height: 19px;
+  background: #eee url(/static/assets/images/progress.png) 100% 0 repeat-y;
+  background-position: 0% 0;
+  }
+
+#progress_text
+{
+  margin-top:0px;
+  padding: 5px;
+  position: absolute;
+  color: #444;
+  width: 100%;
+  height: 100%;
+  background: #eee url(/static/assets/images/progress.png) 100% 0 repeat-y;
+}
+
+#upload_progress.success
+{
+	background: #00cc33 none 0 0 no-repeat;
+}
+
+#upload_progress.failed
+{
+	background: #c00 none 0 0 no-repeat;
+}
+*/
+#uploadlist
+{
+  height:100%;
+  border: 2px solid #222;  
+  border-radius: 10px;
+  }
+
+#uploadlist li
+{
+  text-align:left;
+
+  }

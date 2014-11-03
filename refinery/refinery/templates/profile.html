@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block js_head %}
+
+{% endblock %}
+
+{% block content %}
+	<!-- START PAGE WRAPPER -->
+	<div class="onerow">
+  		<div class="col12 last bigbar" id="main_container">
+
+
+			<div class="widget">
+
+				<div class="alignleft caption">
+					<img src={% if user.image == None %}
+                      "{{url_for('static', filename='images/default.jpg')}}"
+                      {% else %}
+                      "{{url_for('static', filename = 'users/' + user.username + '/images/' + user.image)}}"
+                      {% endif %}
+                      alt="" title="Align Left" />
+
+				</div>
+			</div><!-- row -->
+		</div><!-- bigbar -->
+{% endblock %}
+{% block js %}
+
+{% endblock %}
+
+
+
+
+

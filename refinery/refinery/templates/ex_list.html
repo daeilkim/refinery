@@ -1,0 +1,120 @@
+<!-- Hidden Colorbox Menus -->
+<!--
+<div style='display:none'>
+  <div id='inline_new_ex_{{dID}}'>
+    <div>
+      <input type="button" value="New Topic Model Experiment" onclick="addExperiment('{{g.user.username}}',{{dID}},'topicmodel','{{htmlID}}');"/>
+      <br/>
+      <input type="button" value="New Summarize Experiment" onclick="addExperiment('{{g.user.username}}',{{dID}},'summary','{{htmlID}}');"/>
+    </div>
+  </div>
+</div>
+-->
+
+{% for f in folders %}
+<div style='display:none'>
+  	<div id='inline_settings_{{dID}}_{{e[0].id}}'>
+      <input id="knob_{{dID}}_{{e[0].id}}" class="knob" data-height="90" data-width="90" data-min="1" 
+             data-max="50" data-displayInput="true" data-cursor="true" data-fgColor="#006600" data-thickness=.5 value="{{e[1].nTopics}}">
+      </input>
+      <input class="colorbox_btn" type="button" value="Save Changes" onclick="setTopics({{dID}},{{e[0].id}})"/>
+      {% endif %}
+    </div>
+  </div>
+  <div style='display:none'>
+	<div id='inline_ex_del_{{dID}}_{{e[0].id}}'>
+          <h3>You are about to delete an experiment</h3>
+          <p>Are you sure you want to do this?</p>
+          <p><input class="colorbox_btn" type="button" value="Yes" onclick="deleteExperiment('{{g.user.username}}',{{dID}},{{e[0].id}},'{{htmlID}}')"/></p>
+        </div>
+    </div>
+  </div>
+{% endfor %}
+
+<!-- Actual List -->
+<div class="ex_list">
+  
+  <div class="accord">
+  <ul class="ex_item">
+    <div class="col12 ex_header">
+      <li class="ex_button_col">Run/View</li> 
+      <li class="ex_button_col">Settings</li>
+      <li class="ex_button_col">Info</li>
+      <li class="ex_status_col">Status</li>
+      <li class="ex_button_col">Delete</li>
+    </div>
+    
+    {% for e in exs %}
+      <div class="col12 exrow">
+        {% if e[0].extype == 'topicmodel' %} 
+  
+          <li class="ex_button_col">
+            <a onclick="try_to_start({{dID}},{{e[0].id}},'{{g.user.username}}')" class="ex_run_btn">
+              <img class="ex_icon" src="/static/assets/images/icons/running-icon.png"/>
+            </a>
+          </li>
+          <li class="ex_button_col">
+            <a href="#inline_settings_{{dID}}_{{e[0].id}}" class="colorbox_btn" >
+              <img class="ex_icon" src="{{ url_for('static', filename='assets/images/icons/iconmonstr-gear-icon-48.png') }}" alt="Settings"/>
+            </a>
+          </li>
+          <li class="ex_button_col">
+            <a href="#inline_ex_del_{{dID}}_{{e[0].id}}" class="colorbox_btn">
+              <img src="/static/assets/images/icons/iconmonstr-info-6-icon-128.png" class="ex_icon"/>
+            </a>
+          </li>
+          <li class="ex_status_col">
+            <div id="ex_statusbar_{{dID}}_{{e[0].id}}" style="height:28px;"><p id="ex_status_{{dID}}_{{e[0].id}}"></p></div>
+          </li>
+          <li class="ex_button_col">
+              <a href="#inline_ex_del_{{dID}}_{{e[0].id}}" class="colorbox_btn">
+              <img class="ex_icon" src="/static/assets/images/icons/iconmonstr-x-mark-4-icon.png" />
+              </a>
+          </li>
+        {% endif %}
+        {% if e[0].extype == 'summarize' %} 
+          <li class="ex_button_col">
+            <a onclick="try_to_start({{dID}},{{e[0].id}},'{{g.user.username}}')" class="ex_run_btn">
+              <img class="ex_icon" src="/static/assets/images/icons/running-icon.png"/>
+            </a>
+          </li>
+          <li class="ex_button_col">
+            <!-- This needs to condition on experiment type = summary-->
+            <a href="#inline_settings_{{dID}}_{{e[0].id}}" class="colorbox_btn" >
+              <img class="ex_icon" src="{{ url_for('static', filename='assets/images/icons/iconmonstr-gear-icon-48.png') }}" alt="Settings"/>
+            </a>
+          </li>
+          <li class="ex_button_col">
+            <!-- INFO -->
+            <a href="#inline_ex_del_{{dID}}_{{e[0].id}}" class="colorbox_btn">
+              <img src="/static/assets/images/icons/iconmonstr-info-6-icon-128.png" class="ex_icon"/>
+            </a>
+          </li>
+          <li class="ex_status_col">
+            <div id="ex_statusbar_{{dID}}_{{e[0].id}}" style="height:28px;"><p id="ex_status_{{dID}}_{{e[0].id}}"></p></div>
+          </li>
+          <li class="ex_button_col">
+              <a href="#inline_ex_del_{{dID}}_{{e[0].id}}" class="colorbox_btn">
+              <img class="ex_icon" src="/static/assets/images/icons/iconmonstr-x-mark-4-icon.png" />
+              </a>
+          </li>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <a href="#inline_new_ex_{{dID}}" title="Create New Experiment" class="colorbox_btn new_exp_btn">
+     New Experiment
+    </a>
+
+    <script type="text/javascript">
+      function status_setter{{dID}}() {
+      alert("!");
+      {% for e in exs %}
+      set_status({{dID}},{{e[0].id}},e[0].status);
+      {% endfor %}
+      }
+    </script>
+    
+  </ul>
+  </div>
+</div>
+

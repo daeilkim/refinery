@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% block js_head %}
+<!-- LIB -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/lib/colorbox/colorbox.css') }}"  />
+<script type="text/javascript" src="{{ url_for('static', filename='assets/lib/colorbox/jquery.colorbox-min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/lib/jquery.knob.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/lib/jquery.mixitup.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/lib/d3/d3.v3.min.js') }}"></script>
+
+<!-- OURS -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/listing.css') }}"  />
+{% endblock %}
+
+{% block content %}
+
+<!-- Document browser, accessed from summarization -->
+<div style='display:none'>
+  <div id='inline_browse' class="cbox" style="position:relative;width:1000px;height:800px;">
+    <div id='browse_window' class="bigbar"></div>
+    
+    <div id='browse_list' class="bigbar">
+      <p style="text-align:left;font-size:18px;">Click a Document to read it</p>
+    </div>
+    
+  </div>
+</div>
+
+<!-- Main Menu -->
+<div class="onerow">
+  <div class="col12 last bigbar" id="main_container">
+    
+    {% include "info_page.html"  %}
+
+    <div id="datalist">
+
+      <ul id="Gridx">
+        
+        {% for d in data %}
+        
+        <!-- Edit name and summary colorbox -->
+        
+        <div style='display:none'>
+          <div id='inline_data_edit_{{d[0].id}}' class="cbox">
+            <div style="margin:auto;clear:both;">
+              <h3>Edit dataset information</h3>
+              <div style="text-align:center; font-size: 22px;">
+                Dataset Title:<input class="colorbox_input" id="edit_data_name_{{d[0].id}}" value="{{d[0].name}}"/>
+              </div>
+              <div style="margin:10px;">
+                <div style="text-align:center; font-size: 22px;">Dataset summary, max 1000 characters</div>
+                <textarea class="textarea_cb" rows="8" cols="40" maxlength="1000" id="edit_data_sum_{{d[0].id}}">{{d[0].summary}}</textarea>
+              </div>
+              <div>
+                <input class="colorbox_btn" type="button" value="Save Changes" onclick="edit_dataset('{{g.user.username}}',{{d[0].id}});"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Delete dataset colorbox -->
+        
+        <div style='display:none'>
+          <div id='inline_data_del_{{d[0].id}}' class="cbox">
+            <h3>You are about to delete the dataset</h3>
+            <h2>{{d[0].name}}</h2>
+            <p>Are you sure you want to do this?</p>
+            <p><input class="colorbox_btn" type="button" value="Yes" onclick="delete_dataset({{d[0].id}})"/></p>
+          </div>
+        </div>
+        
+        <!-- add a bar if its not the first item -->
+        {% if loop.index > 1 %} 
+        <li>
+          <div style="width:97%;height:2px;background:grey;margin-top:10px;margin-bottom:10px;margin-left:10px;  auto;z-index:999;"/>
+        </li>
+        {% endif %}
+
+        <!-- dataset display -->
+        
+        <li style="display:inline-block;width:100%;">
+
+          <!-- Header -->
+          
+          <div class="onerow ">
+            <div class="col2 data_list_col1 data_icon">
+              <img src="{{url_for('static',filename=d[0].img)}}"/>
+            </div>
+            
+            <div class="col10 last" style="position:relative; float: right; margin-right: 20px; top: 5px; height: 150px; width: 78%; border: 2px solid black; border-radius: 10px; overflow: auto;">
+              <h2>{{d[0].name}}</h2>
+              <div style="color:black;font-size:20px;text-align:center;">{{d[0].summary}}</div>
+              <div class="dataset_holder" style="width:100px;height:50px;">                
+                <a href="#inline_data_del_{{d[0].id}}" class="dataset_btn">
+                  <img src="/static/assets/images/icons/iconmonstr-x-mark-4-icon.png" style="width:50px;height:50px;" class="exp_icon_btn imgbtn" title="Delete" />
+                </a>
+                <a href="#inline_data_edit_{{d[0].id}}" class="dataset_btn">
+                  <img src="/static/assets/images/icons/iconmonstr-gear-icon-48.png" style="width:40px;height:40px;top:5px;position:relative;" class=" imgbtn exp_icon_btn" title="Edit" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Folders -->
+          
+          <div class="onerow">
+            <div id="folders_{{d[0].id}}">
+              {% with folders = d[1], dID = d[0].id %}
+              {% include "folder_list.html" %}
+              {% endwith %}
+            </div>
+          </div>
+          
+        </li>
+        {% endfor %}
+        
+      </ul>
+      
+    </div>
+  </div>
+
+
+  <!-- Upload bar -->
+  
+  <div class="onerow" id="upload_bar" style="width:99%;height:40px;padding:3px;">
+    <a id="upload_btn" class="col4" onclick="fileSelector.click();" title="Create New Dataset">
+      <img class="imgbtn" style="float:left;width:40px;" src="/static/assets/images/icons/iconmonstr-note-25-icon.png" /> 
+      <span style="float:left;" class="new_data_txt"> Upload Data</span>
+    </a>
+    <div id="upload_prog" class="progressBar col8 last" style="font-size:25px;"><div><div></div></div></div>
+  </div>
+  
+</div>
+
+{% endblock %}
+
+
+
+{% block js %}
+<script type="text/javascript">
+  
+  var viewdoc_url = "{{url_for('get_doc_text', username=g.user.username)}}";
+  var upload_url = "{{url_for('upload_drop',username=g.user.username)}}";
+  var pubsub_url = "{{url_for('stream_menus',username=g.user.username)}}";
+  var username = "{{g.user.username}}";
+  
+</script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/main_menu.js') }}"></script>
+<script>
+
+  {% for d in data %}
+  
+     {% for f in d[1] %}
+  
+     setDirty({{f.id}},"{{f.dirty}}");
+     set_tm_status({{f.id}},"{{f.topicModelEx().status}}");
+     set_sum_status({{f.id}},"{{f.sumModelEx().status}}","X");
+     
+     {% endfor %}
+     
+  {% endfor %}
+  
+  {% if nodata %}
+      show_info(true);
+  {% else %}
+      show_info(false);
+  {% endif %}
+  
+</script>
+{% endblock %}

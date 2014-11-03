@@ -1,0 +1,11 @@
+{% for doc in dox %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<li style="position:relative;clear:both;padding:3px;border:solid 2px gray;display:inline-block;width:100%;border-radius:10px;">
+  <img style="width:30px;float:left;" onclick="viewFile('{{g.user.username}}','{{doc.path}}','{{doc.name}}','{{doc.getStaticURL()}}')" src="{{url_for('static',filename='assets/images/icons/iconmonstr-text-file-4-icon.png')}}"></img>
+  <img src="/static/assets/images/icons/iconmonstr-x-mark-4-icon.png" style="width:30px;float:left;" onclick="try_delete_document('{{g.user.username}}',{{data_id}},{{doc.id}},'{{doc.name}}')">
+
+  <div style="float:left;margin-left:5px;font-size:x-large;">{{doc.name}}</div>
+
+</li>
+<br/>
+{% endfor %}

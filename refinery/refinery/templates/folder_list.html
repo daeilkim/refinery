@@ -1,0 +1,130 @@
+<!-- Colorboxes -->
+{% for f in folders %}
+
+{% endfor %}
+
+<!-- Actual List -->
+<div class="onerow folder_item folder_headers">
+  <div class="col3" >Folder Name</div>
+  <div class="col1" style="font-size:22px;">#Docs</div>
+  <div class="col3">Extract Topics</div>
+  <div class="col3">Extract Phrases</div>
+  <div class="col2 last">Options</div>
+</div>
+
+<div class="folder_list bigbar">
+  
+  {% for f in folders %}
+
+  <!-- Folder colorboxers -->
+  
+  <div style='display:none'>
+    <div id='inline_tm_settings_{{dID}}_{{f.id}}' class="settings_cbox">
+      
+      <div style="margin:auto;clear:both;">
+        <h3>Set the number of topics</h3>
+        <input id="tm_knob_{{f.id}}" class="knob" data-height="90" data-width="90" data-min="1" 
+               data-max="100" data-displayInput="true" data-cursor="true" data-fgColor="#006600" data-thickness=.5 value="{{f.numTopics()}}">
+        </input>
+        <h5 style="margin:10px;text-align:left;"><span style="color:red">WARNING</span>: Saving your changes will reset the model!</h5>
+      </div>
+      <input class="colorbox_btn" type="button" value="Save Changes" onclick="setTopics({{f.id}})"/>
+    </div>
+  </div>
+  
+  <div style='display:none'>
+    <div id='inline_folder_del_{{dID}}_{{f.id}}' class="cbox">
+      <h3>You are about to delete a folder</h3>
+      <p>Are you sure you want to do this?</p>
+      <p><input type="button" value="Yes" onclick="deleteFolder('{{g.user.username}}',{{f.id}},{{dID}})"/></p>
+    </div>
+  </div>
+
+  <!-- Folder display -->
+  
+  <div id="folder_{{dID}}_{{f.id}}" class="onerow folder_item" >
+    <div class="col3 bmem" onclick='start_preproc("{{g.user.username}}",{{dID}},{{f.id}})' >{{f.name}}</div>
+    <div class="col1 bmem">{{f.N()}}</div>
+
+    <div id="prog_row_{{f.id}}" class="col6">
+      <div id="statusbar_{{f.id}}" class="progressBar" style="height:33px;"><div><div></div></div></div>
+    </div>
+    
+    <div id="tm_row_{{f.id}}" class="col3" >
+      
+      <div id="tm_bar_{{f.id}}" class="folderbar">
+        <div class="barcontents">
+        <div style="display:inline-block">
+          <a href="#inline_tm_settings_{{dID}}_{{f.id}}" class="settings_btn" >
+            <img class="imgbtn ex_icon" src="{{ url_for('static', filename='assets/images/icons/iconmonstr-gear-icon-48.png') }}" title="Settings"/>
+          </a>
+        </div>
+        <div id="tm_pretrain_{{f.id}}">
+          <a onclick="start_tm({{f.id}},'{{g.user.username}}')" class="ex_run_btn">
+            <img class="imgbtn ex_icon" src="/static/assets/images/icons/running-icon.png" title="Run Learning"/>
+          </a>
+        </div>
+        <div id="tm_posttrain_{{f.id}}">
+          <a onclick="start_tm({{f.id}},'{{g.user.username}}')" class="ex_run_btn">
+              <img class="imgbtn ex_icon" src="{{ url_for('static', filename='assets/images/icons/iconmonstr-flask-7-icon-256.png') }}" title="Experiment"/>
+            </a>
+        </div>
+        </div>
+      </div>
+      
+      <div id="tm_prog_{{f.id}}">
+        <div id="tm_statusbar_{{f.id}}" class="preprocbar folderprogbar progressBar" ><div><div></div></div></div>
+      </div>
+      
+    </div>
+
+    <div id="sum_row_{{f.id}}" class="col3">
+      
+      <div id="sum_bar_{{f.id}}" class="folderbar">
+        <div id="sum_posttrain_{{f.id}}" class="barcontents">
+          <div style="display:inline-block">
+            <!-- BROWSE -->
+            <a onclick="browse_folder({{f.id}});" class="summarize_btn">
+              <img class="imgbtn ex_icon" src="/static/assets/images/icons/iconmonstr-newspaper-4-icon.png" title="Browse" />
+            </a>
+          </div>
+          <div style="display:inline-block">
+            <!-- EXPERIMENT -->
+            <a onclick="start_sum({{f.id}},'{{g.user.username}}')" class="ex_run_btn">
+              <img class="imgbtn ex_icon" src="/static/assets/images/icons/iconmonstr-flask-7-icon-256.png" title="Experiment" />
+            </a>
+          </div>
+        </div>
+        <div id="sum_pretrain_{{f.id}}" class="barcontents">
+          <div style="display:inline-block" >
+            <!-- RUN -->
+            <a onclick="start_sum({{f.id}},'{{g.user.username}}')" class="ex_run_btn">
+              <img class="imgbtn ex_icon" src="/static/assets/images/icons/running-icon.png" title="Run Learning"/>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div id="sum_prog_{{f.id}}">
+        <div id="sum_statusbar_{{f.id}}" class="folderprogbar progressBar" ><div><div></div></div></div>          
+      </div>
+      
+    </div>
+    <div class="col2 last bmem">
+      
+      
+      {% if loop.index > 1 %}
+      <a href="#inline_folder_del_{{dID}}_{{f.id}}" class="folder_delete_btn">
+        <img class="imgbtn ex_icon" src="/static/assets/images/icons/iconmonstr-x-mark-4-icon.png" title="Delete" />
+      </a>
+      {% endif %}
+
+    </div>
+  </div>
+  {% endfor %}
+        
+</div>
+
+
+
+

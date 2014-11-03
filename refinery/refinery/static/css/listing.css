@@ -1,0 +1,739 @@
+/******** MANAGE DATA HEADER ********/
+
+.filedrag_box
+{
+  display: block;
+  position: relative;
+  height: 125px;
+  padding: 10px;
+  text-align: center;
+  color: #111;
+  border: 2px dashed #555;
+  border-radius: 10px;
+  cursor: default;
+    }
+
+
+.filedrag_box_hover
+{
+  display: block;
+  position: relative;
+  height: 125px;
+  padding: 10px;
+  text-align: center;
+  color: #111;
+  border: 2px dashed #555;
+  border-radius: 10px;
+  cursor: default;
+  color: #f00;
+  border-color: #f00;
+  border-style: solid;
+  box-shadow: inset 0 3px 4px #888;
+}
+
+#listing_sub_hdr img{
+	float: left;
+	height: 20px;
+	width: 20px;
+}
+
+#search_input{
+	float: left;
+	width: 200px;
+	margin-top: 10px;
+	margin-left: 10px;
+	padding: 5px;
+	height: 15px;
+	border: 2px solid #333;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+/** IMAGES AND DATASET LISTINGS **/
+
+
+
+.data_tabs {
+	width: 50px;
+	padding: 0px;
+}
+
+.dtabs {
+	padding: 0px;
+	margin: 0px;
+}
+
+.ex_list
+{
+  width: 700px;
+  background: #ffffff;
+  opacity: 1.0;
+  position: relative;
+  }
+
+.preprocbar
+{
+  margin-top:3px;
+  }
+
+.ui-tabs .ui-tabs-nav li { float: right; }
+.ui-tabs .ui-tabs-nav li a { float: right; }
+
+.dtabs .tab_content
+{
+  position: relative;
+  width: 720px;
+  min-height: 525px;
+  max-height: 525px;
+  border: 2px solid black;
+  left: 10px;
+  top: 2px;
+  overflow-x:hidden;
+}
+
+
+
+.info_text{
+	position: relative;
+	color: black;
+	font-family: Helvetica;
+	font-size: 18px;
+	padding: 10px;
+}
+
+.infotable td
+{
+  width:150px;
+
+  font-size:20px;
+
+  }
+
+
+#exp_menu_header {
+	display: inline-block;
+}
+
+#exp_menu_header li{
+	display: inline;
+	float: left;
+	color: #000;
+}
+
+/* UL Experiment rows*/
+
+.ex_header{
+    width: 95%;
+	margin: 5px;
+	height: 20px;
+	font-family: Helvetica;
+}
+
+.exrow{
+  border: 2px solid #222;  
+  border-radius: 10px;
+  margin: 5px;
+  width: 95%;
+}
+
+.ex_item{
+	display: inline-block;
+	margin: 0px;
+	padding: 5px;
+    width:100%;
+	margin-left: 10px;
+}
+
+.ex_item li{
+	float: left;
+	display: inline;
+	text-align: center;
+	font-size: 15px;
+	color: black;
+	padding: 0px;
+	margin-top: 2px;
+}
+
+/* Fix column widths for experiment list */
+
+
+.ex_button_col{
+	width:15%;
+    margin-bottom:1px;
+}
+
+.ex_status_col{
+	width: 40%;
+}
+
+img.ex_icon{
+	height: 30px;
+	width: 30px;
+    margin:auto;
+}
+
+.run_icon_border{
+	position: relative;
+	padding: 0px;
+	border: 2px solid #333;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	width: 140px;
+	margin-left: 15px;
+}
+
+.run_icon_border:hover{
+	border: 2px solid red;
+}
+
+.status_txt{
+	position: relative;
+	float: left;
+	bottom: 25px;
+	left: 40px;
+	font-size: 18px;
+}
+
+img.settings_icon{
+	margin-left: 25px;
+}
+
+img.delete_icon{
+	margin-left: 15px;
+}
+
+
+
+a.edit_data_btn
+{
+  position: relative;
+  float: right;
+  bottom: 40px;
+  right: 10px;
+  text-align: center;
+  font-size: 16px;
+  color: #006600;
+  width: 240px;
+  font-family: Courier,Georgia, serif;
+}
+
+img.exp_icon_btn{
+  float: right;
+	height: 40px;
+	width: 40px;
+}
+
+img.stats_btn{
+	width: 33px;
+	height: 33px;
+}
+
+img.exp_icon_btn.dataset_btn
+{
+  position: relative;
+
+  bottom: 40px;
+}
+
+
+
+.show_exp_btn{
+	text-align: center;
+	font-family: 'Helvetica', Courier, monospace;
+	font-size: 14px;
+	padding: 0px;
+	margin: 0px;
+}
+
+/** NEWLY ADDED END**/
+
+
+.data_list_col1{
+	border: none;
+	text-align: center;
+	position: relative;
+	
+}
+
+.data_list_col2, .data_list_col3 {
+    height: 150px;
+	border: none;
+}
+
+.data_list_col2 p{
+	padding: 0px;
+	margin: 0px;
+}
+
+.data_list_name  {
+	text-align: center;
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 25px;
+}
+
+.data_list_stats {
+	color: #333;
+	font-size: 14px;
+	text-align: left;
+	padding: 0px;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+.data_list_stats li {
+	padding: 0px;
+	margin-top: 3px;
+}
+
+.data_list_col2 {
+	width: 520px;
+}
+
+.data_list_col3 {
+	border: none;
+	width: 160px;
+}
+
+.data_icon img{
+	border-radius: 20px;
+	margin-left: 10px;
+	margin-top: 10px;
+	height: 140px;
+	text-align: center;
+	width: auto;
+}
+
+#Gridx{
+	position: relative;
+	margin-top: 10px;
+	width: 100%;
+	margin-left: 10px;
+	padding: 0px;
+	text-align: left;
+	font-size: 0.1px;
+       overflow-y:scroll;
+       
+}
+
+.data_list_run {
+	position: relative;
+	right: 10px;
+	top: 15px;
+}
+
+.data_list_run .filter_icon{
+	position: relative;
+	float: left;
+	top: 60px;
+	left: -50px;
+	padding: 0px;
+	margin: 0px;
+	height: 55px;
+	width: 55px;
+}
+
+#upload_btn{
+	border: 3px solid black;
+	border-radius: 10px;
+	width: 220px;
+	margin-left: 5px;
+}
+
+#upload_bar
+{
+  position: relative;
+  top: -25px;
+  /*border: solid 2px black;
+  border-radius: 10px;*/
+}
+
+#upload_prog{
+	position: relative;
+	top: 4px;
+	width: 800px;
+}
+
+#Grid li p{
+	position: relative;
+}
+
+#Grid:after{
+	content: '';
+	display: inline-block;
+	width: 100%;
+	text-align: left;
+}
+
+#Grid .mix{
+	display: none;
+	opacity: 0;
+	color: #fff;
+	font-size: 10px;
+	width: 98%;
+	margin: 0px;
+}
+
+#Grid img{
+}
+
+#Grid img:hover {
+	opacity: .5;
+}
+
+#Grid li{
+	padding: 0px;
+	margin: 0px;
+}
+
+#Grid p {
+	color: #111;
+}
+
+#Grid .gap{
+	display: inline-block;
+	width: 50px;
+}
+
+/* Data-List Sub Menu */
+.data_list_left{
+	position: relative;
+	padding: 0px;
+	float: left;
+}
+
+.data_list_right {
+	position: relative;
+	top: 5px;
+	float: left;
+	height: 190px;
+	right: 20px;
+	width: 800px;
+	padding: 0px;
+}
+
+.data_list_subC{
+	text-decoration: underline;
+	text-align: center;
+}
+
+.data_list_subD{
+	font-style: italic;
+}
+
+.data_list_subD p {
+	height: 50px;
+	width: 190px;
+	overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0);
+}
+
+.data_list_hdr{
+	position: relative;
+	padding: 0px;
+	margin-bottom: 3px;
+	margin-top: 10px;
+	margin-left: 3px;
+	display: inline-block;
+	float: left;
+	font-family: Century;
+	font-size: 28px;
+}
+
+.data_list_hdr li{
+	position: relative;
+	float: left;
+	display: inline;
+	margin-right: 35px;
+}
+
+.new_data_btn{
+	border: 2px solid black;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin-left: 20px;
+}
+
+.new_data_btn img{
+	position: relative;
+	float: left;
+}
+
+.data_list_hdr li a{ 
+	height: 30px;
+	cursor: pointer;
+}
+
+.new_data_txt{
+	position: relative;
+	float: right;
+	padding-right: 10px;
+	font-size: 33px;
+}
+
+.new_data_txt:hover {
+	opacity: 0.5;
+}
+
+.new_exp_btn{
+	font-family: Century;
+	font-size: 20px;
+	position: relative;
+	top: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-decoration: none;
+	border: 2px solid black;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+
+
+.ui-tabs {
+	background: #fff;
+	border: none;
+}
+
+.ui-tabs.ui-tabs-vertical {
+	background: #fff;
+    padding: 0;
+}
+.ui-tabs.ui-tabs-vertical .ui-widget-header {
+	position: relative;
+	margin-top: 10px;
+
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav {
+    float: left;
+    position: relative;
+    left: 0px;
+    width: 50px;
+    background: #FFF;
+
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li {
+    clear: left;
+    width: 100%;
+    margin: 1px;
+    overflow: hidden;
+    position: relative;
+}
+
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li a {
+    display: block;
+    position: relative;
+    border: 2px solid #000;
+    margin-top: 5px;
+    -webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li a:hover {
+    cursor: pointer;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
+    padding-bottom: 0;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav li:last-child {
+    margin-bottom: 0px;
+}
+
+
+.ui-tabs.ui-tabs-vertical .ui-tabs-panel {
+
+                                           
+}
+
+
+
+
+#browse_window
+{
+  color: black;
+  white-space: pre-wrap;
+  text-align:left;
+  display:inline-block;
+  position:relative;
+  top:0px;
+  width:70%;
+  height:89%;
+  float:left;
+  text-align:left;
+  font-size: 20px;
+  overflow-x:hidden;
+  overflow-y: scroll;
+  margin-right:10px;
+  }
+
+#browse_list
+{
+  padding:2px;
+  margin-left:10px;
+  position:relative;
+  width:23%;
+  height:89%;
+  border: solid 2px #aaa;
+  overflow-x:hidden;
+  overflow-y:scroll;
+  }
+
+.browse_list_item
+{
+  text-align:left;
+  font-size:20px;
+  border: solid 1px #ddd;
+  border-radius:3px;
+  margin-top:1px;
+  padding:2px;
+  }
+
+.colorbox_btn
+{
+  float:right;
+  display:inline-block;
+
+  }
+
+.dataset_holder
+{
+  
+  position:absolute;
+  top:10px;
+  right:10px;
+  float:right;
+
+  }
+
+h2
+{
+  color: black;
+  font-family: Helvetica;
+  font-size: 32px;
+  }
+
+h3
+{
+  color: black;
+  font-family: Helvetica;
+  font-size: 22px;
+  }
+
+h5
+{
+  color: black;
+  font-family: Helvetica;
+  font-size: 17px;
+  }
+
+.exinfo{
+         position:absolute;
+         bottom:0px;
+         height: 180px;
+         width:100%;
+         }
+
+.exinfo2{
+          position:relative;
+          width:49%;
+          height:100%;
+          float:left;
+          display:inline-block;
+          border:1px solid #ccc;
+          border-radius: 3px;
+         }
+
+.bmem
+{
+  background-color: transparent;
+
+  }
+
+
+.folder_headers{
+	border: 2px solid #bbb;
+	border-radius: 10px;
+	line-height: 30px;
+	height: 30px;
+}
+
+.folder_list
+{
+height: 100px;
+  }
+
+.folder_item
+{
+  color: black;
+  font-family: Helvetica;
+  font-size: 22px;
+  padding: 3px;
+  width: 97%;
+  margin-left: 5px;
+  }
+
+.folderbar
+{
+  border-radius:10px;
+  padding: 1px;
+  height:36px;
+  }
+
+.folderprogbar
+{
+  height:36px;
+  }
+
+.folder_delete_btn img
+{
+  width:40px;
+  height:40px;
+  }
+
+.progressBar {
+               border-radius:10px;
+               height: 36px;
+               border: 1px solid #111;
+               background-color: #292929;
+               }
+ 
+.progressBar div {
+        height: 100%;
+        color: #fff;
+        text-align: left;
+                   
+        line-height: 36px; /* same as #progressBar height if we want text middle aligned */
+        width: 0px;
+                   border-radius: 10px;
+        background-color: #0099ff;
+}
+
+.progressBar div div
+{
+
+  margin-left:4px;
+
+  }
+
+.barcontents
+{
+  height: 36px;
+  padding:1px;
+  }
+
+

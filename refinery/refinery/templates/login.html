@@ -1,0 +1,26 @@
+<head>
+  <link href='http://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'/>
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/login.css') }}"/>
+</head>
+<body>
+	
+<form id="login" method="post" action="{{ url_for('login') }}" name="login"> 
+	{{ form.hidden_tag() }}
+    <center><h2>refinery<span id="small"> (beta: invitation only)</span></center>    
+    <div>
+    	<label for="login_username">Username</label>{{ form.username(id_='login_username', class_='field required') }} 
+    </div>			
+    <div>
+    	<label for="login_password">Password</label>{{ form.password(id_='login_password', class_='field required') }} 
+    </div>
+			
+    <p class="forgot"><a href="#">Forgot your password?</a></p>
+	<p class="forgot">Not a member? <a href="#">Sign Up</a></p>
+    <div class="submit">
+        <button type="submit">Log in</button>   
+        <label>{{form.remember_me(id_='login_remember', name_='remember', value_='yes')}} Remember Me </label>
+    </div>
+
+</form>
+</div>
+</body>
