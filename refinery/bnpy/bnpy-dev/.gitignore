@@ -15,7 +15,6 @@ results/
 profile/
 .idea/*
 .ipynb_checkpoints/
-__init__.py
 
 # ======================================================  EXCLUDE FILE PATTERNS
 # Exclude script files
