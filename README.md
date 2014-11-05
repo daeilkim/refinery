@@ -34,8 +34,7 @@ Once you have both the virtual box and vagrant installed, simply git clone the r
     git clone https://github.com/daeilkim/refinery.git
     ```
 
-2. Start the Refinery Vagrant VM. This will take a while as it is downloading all the necessary packages as well as configuring
-these dependencies and running the web-app as a service.
+2. Start the Refinery Vagrant VM from the root folder of refinery. This will take a while as it is downloading all the necessary packages as well as configuring these dependencies and running the web-app as a service.
 
     ```
     vagrant up
