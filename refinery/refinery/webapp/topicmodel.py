@@ -264,7 +264,7 @@ def run_topic_modeling(username,folder_id,ex_id):
     a = {"tm_id":str(d.id), "username":username}
 
     hmodel = bnpy.Run.run(data, 'HDPModel', 'Mult', 'VB', doSaveToDisk=False, K=exinfo.nTopics,
-                          nLap=50, initname="randomfromprior",
+                          nLap=100, initname="randomfromprior",
                           customFuncPath="refinery/webapp/", customFuncArgs=json.dumps(a))
     '''
                           moves='birth,merge', birthPerLap=10, \
