@@ -131,7 +131,7 @@ d3.refinery.word_cloud = function module(width, height) {
 
     var fill = d3.scale.category20();
 	var svg;
-    var NUM_WORDS = 20;
+    var NUM_WORDS = 40;
     var SCALE_FAC = 2.0;
     
 	function chart(_data) {
