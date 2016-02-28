@@ -47,7 +47,7 @@ def load_user(user_id):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     '''Serves the login page if not logged in, or the main menu if logged in'''
-    if g.user is not None and g.user.is_authenticated():
+    if g.user is not None and g.user.is_authenticated:
         username = g.user.username
         return redirect(url_for('manage_data', username=username))
 
