@@ -20,8 +20,8 @@ You'll need both the Oracle VM VirtualBox software and Vagrant installed which y
 * [Vagrant][3]
 
 [1]: http://git-scm.com/
-[2]: https://www.virtualbox.org/
-[3]: http://vagrantup.com/
+[2]: https://www.virtualbox.org/ (Working for version 5.0)
+[3]: http://vagrantup.com/ (Working for version 1.8.1)
 
 
 Running Refinery
