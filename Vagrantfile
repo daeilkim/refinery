@@ -98,7 +98,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     shell.inline = "mkdir -p /etc/puppet/modules;
                   puppet module install puppetlabs/stdlib;
                   puppet module install tracywebtech-supervisor;
-                  puppet module install puppetlabs/postgresql"
+                  puppet module install puppetlabs-postgresql"
   end
 
   config.vm.provision "puppet" do |puppet|
