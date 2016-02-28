@@ -8,7 +8,7 @@ Refinery - A locally deployable open-source web platform for analysis of large d
 What is Refinery?
 ===============
 Built mostly in Python, Refinery is a full-stack web app that works with Vagrant VM and Puppet that can be 
-run from a single command after downloading the git repository. The web-app is accessed through 
+run from a single command after downloading the git repository. 
 
 
 Pre-Requisites
@@ -47,7 +47,8 @@ Once you have both the virtual box and vagrant installed, simply git clone the r
     ```
 
 MIT License
-Copyright (C) <2014>  <Daeil Kim>
+
+Copyright (C) <2014> Daeil Kim
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
