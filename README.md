@@ -5,6 +5,8 @@ Refinery - A locally deployable open-source web platform for analysis of large d
 * Author - Ben Swanson <dujiaozhu@gmail.com>
 [1]: https://github.com/daeilkim/refinery.git
 
+For more information please refer to our help pages in: [1]: http://daeilkim.github.io/refinery
+
 What is Refinery?
 ===============
 Built mostly in Python, Refinery is a full-stack web app that works with Vagrant VM and Puppet that can be 
