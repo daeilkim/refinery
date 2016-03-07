@@ -52,6 +52,28 @@ vagrant up
 
 <p>For machine learning, Refinery uses the BNPy package <a href="https://bitbucket.org/michaelchughes/bnpy-dev/">(BNPy Git Repository)</a>. The backend is supported by a PostgreSQL database used to store document corpuses and Redis for the pub/sub messaging framework used to see realtime updates. The web application is built on Python Flask, Gunicorn, Celery, and Nginx.</p>
 
+<h4>
+<a id="logging-into-vagrant" class="anchor" href="#logging-into-vagrant" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Logging into Vagrant</h4>
+
+<p>Once the repository is cloned and the command <strong>vagrant up</strong> has been executed, you'll be able to login by typing in:</p>
+
+<pre><code>vagrant ssh
+</code></pre>
+
+<p>This should bring you into the default home directory with the path <strong>/home/vagrant</strong>. From there, you'll have a virtual machine with a directory structure similar to a default Ubuntu installation. If you're interested in modifying anything associated with refinery, you'll find the application located in the <strong>/vagrant/refinery</strong> directory.</p>
+
+<h4>
+<a id="topic-modeling-code" class="anchor" href="#topic-modeling-code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Topic Modeling Code</h4>
+
+<p>The code that executes the topic models can be found in <strong>/vagrant/refinery/webapp/topicmodel.py</strong>. For those who have worked with BNPy before, you can find the execution command on line 266 as:</p>
+
+<pre><code>hmodel = bnpy.Run.run(data, 'HDPModel', 'Mult', 'VB', doSaveToDisk=False, K=exinfo.nTopics,
+                      nLap=100, initname="randomfromprior",
+                      customFuncPath="refinery/webapp/", customFuncArgs=json.dumps(a))
+</code></pre>
+
+<p>For more information on how to configure BNPy, please refer to the developer's documentation found on their Git repository <a href="https://bitbucket.org/michaelchughes/bnpy-dev/">(BNPy Git Repository)</a>.</p>
+
 <h3>
 <a id="troubleshooting-refinery" class="anchor" href="#troubleshooting-refinery" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Troubleshooting Refinery</h3>
 
