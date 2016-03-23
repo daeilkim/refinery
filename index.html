@@ -7,7 +7,8 @@
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -15,17 +16,18 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Refinery</h1>
-        <p>Refinery - A locally deployable open-source web platform for analysis of large document collections</p>
-
-        <p class="view"><a href="https://github.com/daeilkim/refinery">View the Project on GitHub <small>daeilkim/refinery</small></a></p>
-
+        <h1 class="header">Refinery</h1>
+        <p class="header">Refinery - A locally deployable open-source web platform for analysis of large document collections</p>
 
         <ul>
-          <li><a href="https://github.com/daeilkim/refinery/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/daeilkim/refinery/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/daeilkim/refinery">View On <strong>GitHub</strong></a></li>
+          <li class="download"><a class="buttons" href="https://github.com/daeilkim/refinery/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/daeilkim/refinery/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/daeilkim/refinery">View On GitHub</a></li>
         </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/daeilkim">daeilkim</a></p>
+
+
       </header>
       <section>
         <h3>
@@ -39,13 +41,28 @@
 <p>Refinery is deployed locally using Vagrant (tested on v1.8.1) and VirtualBox (tested on v5.0). The application is highly scalable and capable of processing large document corpuses due to a Bayesian nonparametric toolbox BNPy built around the latest advances for scalable inference in types of models. Refinery can be considered a general tool for quickly discovering a set of topics which can then be leveraged to quickly isolate and extract insights into relevant documents. </p>
 
 <h3>
-<a id="running-refinery" class="anchor" href="#running-refinery" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Running Refinery</h3>
+<a id="installing-and-running-refinery" class="anchor" href="#installing-and-running-refinery" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installing and Running Refinery</h3>
 
-<p>Refinery is a browser driven web application built primarily off of Python. It was developed with the requirement that its implementation process be as simple as possible. Refinery requires three main packages - Git, Virtualbox, and Vagrant VM. Git is needed to clone the repository that will contain the main source code. VirtualBox and Vagrant VM allows Refinery to exist within a virtual machine that is accessible through your browser. The Vagrant package allows for the deployment of a Puppet manifest, which enables the automated installation of a large number of necessary software modules. To modify the installation process, the configuration file <strong>VagrantFile</strong> located within the root directory contains settings that help guide this process. Installation of Refinery is as follows from the command line:</p>
+<p>Refinery is a browser driven web application built primarily off of Python. It was developed with the requirement that its implementation process be as simple as possible. Refinery requires three main packages - Git, Virtualbox, and Vagrant VM. VirtualBox and Vagrant VM allows Refinery to exist within a virtual machine that is accessible through your browser. The Vagrant package allows for the deployment of a Puppet manifest, which enables the automated installation of a large number of necessary software modules. It <strong><em>requires approximately 2.3GB of hard drive space</em></strong> and a relatively fast Internet connection. <strong><em>Installation will run roughly 20-30 minutes of your time using a high-speed Internet connection</em></strong> so please keep that in mind before installing. Git is needed to clone the repository that will contain the main source code, but if you don't wish to use Git, you can always just download the zip file and uncompress it to a folder you like. However, you'll still need these two pieces of software:</p>
+
+<ul>
+<li><a href="https://www.virtualbox.org/">Oracle VM VirtualBox (working for v5.0)</a></li>
+<li><a href="https://www.vagrantup.com/downloads.html">Vagrant (working for v1.8.1)</a></li>
+</ul>
+
+<p>To modify the installation process, the configuration file <strong>VagrantFile</strong> located within the root directory contains settings that help guide this process. Installation of Refinery is as follows from the command line:</p>
 
 <pre><code>git clone https://github.com/daeilkim/refinery.git
 vagrant up
 </code></pre>
+
+<p>After this command, Refinery will be booting up the virtual machine and loading up the web server. You'll need to then open up any browser and go to this URL: <strong><a href="http://11.11.11.11:8080">http://11.11.11.11:8080</a></strong>. You should see a login screen afterwards which you can login with:</p>
+
+<pre><code>username: doc
+password: refinery
+</code></pre>
+
+<p>To see how you Refinery works, you can watch this <a href="https://youtu.be/7yRQ1J9Z_LI">video</a> which shows a basic run-through using one of the included datasets within the repository.</p>
 
 <h3>
 <a id="further-information" class="anchor" href="#further-information" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Further information</h3>
@@ -97,11 +114,10 @@ Copyright (C)  Daeil Kim (<a href="https://github.com/daeilkim" class="user-ment
 <p>Refinery uses several NLP packages that are also open-sourced. It primarily uses BNPy (<a href="https://bitbucket.org/michaelchughes/bnpy-dev/">https://bitbucket.org/michaelchughes/bnpy-dev/</a>) licensed under BSD-3, but also the <strong>Splitta</strong> algorithm for sentence boundary detection (<a href="https://code.google.com/archive/p/splitta/">https://code.google.com/archive/p/splitta/</a>) which is licensed under Apache 2.0.</p>
       </section>
       <footer>
-        <p>This project is maintained by <a href="https://github.com/daeilkim">daeilkim</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
   </body>
 </html>
