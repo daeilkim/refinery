@@ -13,41 +13,27 @@ Built mostly in Python, Refinery is a full-stack web app that works with Vagrant
 run from a single command after downloading the git repository. 
 
 
-Pre-Requisites
+Installing and Running Refinery
 ===============
-You'll need both the Oracle VM VirtualBox software and Vagrant installed which you can find here as well as git.  
+Refinery is a browser driven web application built primarily off of Python. It was developed with the requirement that its implementation process be as simple as possible. Refinery requires three main packages - Git, Virtualbox, and Vagrant VM. VirtualBox and Vagrant VM allows Refinery to exist within a virtual machine that is accessible through your browser. The Vagrant package allows for the deployment of a Puppet manifest, which enables the automated installation of a large number of necessary software modules. It **_requires approximately 2.3GB of hard drive space_** and a relatively fast Internet connection. **_Installation will run roughly 20-30 minutes of your time using a high-speed Internet connection_** so please keep that in mind before installing. Git is needed to clone the repository that will contain the main source code, but if you don't wish to use Git, you can always just download the zip file and uncompress it to a folder you like. However, you'll still need these two pieces of software:
 
-* [Git][1]
-* [Oracle VM VirtualBox (working for v5.0)][2]
-* [Vagrant (working for v1.8.1)][3]
+* [Oracle VM VirtualBox (working for v5.0)](https://www.virtualbox.org/)
+* [Vagrant (working for v1.8.1)](https://www.vagrantup.com/downloads.html)
 
-[1]: http://git-scm.com/
-[2]: https://www.virtualbox.org/ 
-[3]: http://vagrantup.com/ 
+To modify the installation process, the configuration file **VagrantFile** located within the root directory contains settings that help guide this process. Installation of Refinery is as follows from the command line:
 
-
-Running Refinery
-===============
-Once you have both the virtual box and vagrant installed, simply git clone the refinery repository
-
-1. Git clone this repository to download necessary vagrant files
-
-    ```
     git clone https://github.com/daeilkim/refinery.git
-    ```
-
-2. Start the Refinery Vagrant VM from the root folder of refinery. This will take a while as it is downloading all the necessary packages as well as configuring these dependencies and running the web-app as a service.
-
-    ```
     vagrant up
-    ```
 
-3. Open up any browser and go to this address (username/password: doc/refinery): 
+After this command, Refinery will be booting up the virtual machine and loading up the web server. You'll need to then open up any browser and go to this URL: **http://11.11.11.11:8080**. You should see a login screen afterwards which you can login with:
 
-    ```
-    http://11.11.11.11:8080
-    ```
+    username: doc
+    password: refinery
 
+To see how you Refinery works, you can watch this [video](https://youtu.be/7yRQ1J9Z_LI) which shows a basic run-through using one of the included datasets within the repository.
+
+Licensing
+===============
 MIT License
 
 Copyright (C) <2014> Daeil Kim
