@@ -87,15 +87,15 @@ def upload_drop(username=None):
         import tarfile
         tar_file = tarfile.open(fileobj=fid)
         tar_filename = os.path.join(userpath,ufilename)
-        nFiles = len(tar_file.getmembers())
+        valid_names = [x for x in tar_file.getnames() if (os.path.splitext(x)[1] == '.txt') or (os.path.splitext(x)[1] == '.pdf')]
+        nFiles = len(valid_names)
+        print nFiles
         lastProg = 0
         count = 0.0
-        for member in tar_file.getnames():
+        for member in valid_names:
             filename = os.path.basename(member)
             if filename:
-                fn,ext = os.path.splitext(filename)
-                if ext == ".txt" or ext == ".pdf":
-                    add_txt(os.path.join(userpath,filename), tar_file.extractfile(member),filename,dset)
+                add_txt(os.path.join(userpath,filename), tar_file.extractfile(member),filename,dset)
             count += 1.0
             update = str(int(count / float(nFiles) * 100))
             if update != lastProg:
