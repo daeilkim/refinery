@@ -83,6 +83,26 @@ def upload_drop(username=None):
     elif ext == ".txt" or ext == ".pdf":
         add_txt(os.path.join(userpath,filename),fid,filename,dset)
 
+    elif ext == ".tar" or ext == ".gz" or ext == ".bz2":
+        import tarfile
+        tar_file = tarfile.open(fileobj=fid)
+        tar_filename = os.path.join(userpath,ufilename)
+        nFiles = len(tar_file.getmembers())
+        lastProg = 0
+        count = 0.0
+        for member in tar_file.getnames():
+            filename = os.path.basename(member)
+            if filename:
+                fn,ext = os.path.splitext(filename)
+                if ext == ".txt" or ext == ".pdf":
+                    add_txt(os.path.join(userpath,filename), tar_file.extractfile(member),filename,dset)
+            count += 1.0
+            update = str(int(count / float(nFiles) * 100))
+            if update != lastProg:
+                lastProg = update
+                s = 'uprog,' + update
+                msgServer.publish(channel, "%s" % s)        
+
     else:
         print "unknown file format",ext,filename
 
